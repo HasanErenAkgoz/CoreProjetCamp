@@ -1,0 +1,109 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<center><h2>İstatistikler Tablosu</h2></center>
+<br />
+<head>
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/Themes/AdminLTE-3.0.4plugins/summernote/summernote-bs4.min.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- Small boxes (Stat box) -->
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box" style="background-color:aquamarine">
+                        <div class="inner">
+                            <h3>@ViewBag.totalCategory</h3>
+
+                            <p>Toplam Kategori Sayısı</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-list-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box" style="background-color:coral">
+                        <div class="inner">
+                            <h3>@ViewBag.numberofTitlesWithSoftwareName</h3>
+
+                            <p>Yazılım Kategorisine Ait Başlık</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box" style="background-color:cornflowerblue">
+                        <div class="inner">
+                            <h3>@ViewBag.authorsWiththeLetterAinTheirName</h3>
+
+                            <p>Yazar Adında 'A' Harfi Geçen Yazar Sayısı</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fab fa-searchengin"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box" style="background-color:tomato">
+                        <div class="inner">
+                            <h3>@ViewBag.categoryWithTheMostTitles</h3>
+
+                            <p>En Fazla Başlığa Sahip Kategori</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-heading"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box" style="background-color:greenyellow">
+                        <div class="inner">
+                            <h3>@ViewBag.categoryStatusControl</h3>
+
+                            <p>Kategoride True ile False Farkı</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-arrows-alt-h"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </section>
+</body>

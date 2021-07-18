@@ -1,0 +1,22 @@
+﻿@model Entity.Concrate.Category
+@{ ViewData["Title"] = "EditCategory";
+                Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+<center><h1>Kategori Güncelleme Sayfası</h1></center>
+<br />
+
+@using (Html.BeginForm("Update", "Category", FormMethod.Post))
+{
+    @Html.HiddenFor(category => category.Id)
+    <label>Kategori Adını Giriniz</label>
+    @Html.TextBoxFor(category => category.Name, new { @class = "form-control" })
+    <label class="text-danger">@Html.ValidationMessageFor(category => category.Name)</label>
+    <br />
+    <label>Lütfen Badge Tipini Seçiniz</label>
+    @Html.DropDownListFor(category => category.BadgeStyleId, (List<SelectListItem>)ViewBag.badgeValue, new { @class = "form-control" })
+
+    <button type="submit" class="btn btn-success">Kategorinizi Güncelleyin</button>
+
+}
+
+

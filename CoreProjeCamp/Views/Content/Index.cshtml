@@ -1,0 +1,13 @@
+﻿@using Entity.Dtos
+@model List<ContentsDTO>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+@foreach (var item in Model)
+{
+    @item.CategoryName
+}
+

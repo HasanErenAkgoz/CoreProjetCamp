@@ -1,0 +1,20 @@
+﻿@model Entity.Concrate.Category
+
+@{ ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+
+@using (Html.BeginForm("Add", "Category", FormMethod.Post))
+{
+<form method="post" class="form-group" action="/Category/Add">
+    <label>Kategori Adını Giriniz</label>
+    <input type="text" maxlength="50" class="form-control" placeholder="Lütfen Kategori Adınızı Giriniz" name="Name" />
+    <label class="text-danger">@Html.ValidationMessageFor(category => category.Name)</label>
+    <br />
+    <label>Badge Türü Seçiniz</label>
+    @Html.DropDownListFor(category => category.BadgeStyleId, (List<SelectListItem>)ViewBag.badgeValue, new { @class = "form-control" })
+    <label class="text-danger">@Html.ValidationMessageFor(category => category.BadgeStyleId)</label>
+
+    <br />
+    <button type="submit" class="btn btn-success">Kategori Ekle</button>
+</form>
+}

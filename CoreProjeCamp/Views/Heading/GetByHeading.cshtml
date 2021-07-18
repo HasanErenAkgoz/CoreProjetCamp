@@ -1,0 +1,57 @@
+﻿@model Entity.Concrate.Heading
+@{
+    ViewData["Title"] = "GetByHeading";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@using (Html.BeginForm("GetByHeading", "Heading", FormMethod.Post))
+{
+
+
+    <section class="content">
+        <div class="container-fluid">
+            <!-- SELECT2 EXAMPLE -->
+            <div style="margin-top:1rem" class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Başlık Güncelleme</h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Başlık İsmi</label>
+                                @Html.TextBoxFor(heading => heading.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(heading => heading.Name)
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori Adı</label>
+                                @Html.DropDownListFor(heading => heading.CategoryId, (List<SelectListItem>)ViewBag.categoryValue, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(heading => heading.Name)
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Yazar Adı</label>
+                                @Html.DropDownListFor(heading => heading.WriterId, (List<SelectListItem>)ViewBag.writerName, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group">
+                                @Html.HiddenFor(heading => heading.Date)
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    <button type="submit" class="btn btn-warning">Başlık Güncelle</button>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+}
+
+

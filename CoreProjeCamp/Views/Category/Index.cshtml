@@ -1,0 +1,37 @@
+﻿@using Entity.Concrate
+@model List<Category>
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+<style>
+    table {
+        margin: auto;
+    }
+</style>
+<!DOCTYPE html>
+<link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
+<br />
+<table class="table table-bordered table-hover">
+    <thead class="table">
+        <tr>
+            <th>#</th>
+            <th>Kategori Adı</th>
+            <th>İşlemler</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <th>@item.Id</th>
+    <td>@item.Name</td>
+    <td><a href="~/Category/Delete/@item.Id" class="btn btn-danger">Sil</a> <a href="~/Category/EditCategory/@item.Id" class="btn btn-warning">Güncelle</a> <a href="#" class="btn btn-primary">Başlıklar</a></td>
+
+</tr>}
+    </tbody>
+    
+</table>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target="#Add">
+    Kategori Ekle
+</button>
+<span asp-validation-for="Email"></span>

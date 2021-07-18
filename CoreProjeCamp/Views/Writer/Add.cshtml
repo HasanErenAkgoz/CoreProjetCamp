@@ -1,0 +1,80 @@
+﻿@model Entity.Concrate.Writer
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@using (Html.BeginForm("Add", "Writer", FormMethod.Post))
+{
+    <br />
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <!-- SELECT2 EXAMPLE -->
+            <div style="margin:auto" class="card card-default">
+                <div class="card-header">
+                    <h3 class="card-title">Yazar Ekleme İşlemi</h3>
+
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                    </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Yazar Adı*</label>
+                                @Html.TextBoxFor(writer => writer.Name, new { @class = "form-control" })
+                                <label class="text-danger"> @Html.ValidationMessageFor(writer => writer.Name)</label>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Yazar Soyadı*</label>
+                                @Html.TextBoxFor(writer => writer.Surname, new { @class = "form-control" })
+                                <label class="text-danger">  @Html.ValidationMessageFor(writer => writer.Surname)</label>
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>Email Adresi*</label>
+                                @Html.TextBoxFor(writer => writer.Mail, new { @class = "form-control", @type = "email" })
+                                <label class="text-danger">@Html.ValidationMessageFor(writer => writer.Mail)</label>
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group">
+                                <label>Şifreniz*</label>
+                                @Html.TextBoxFor(writer => writer.Password, new { @class = "form-control", @type = "password" })
+                                <label class="text-danger">@Html.ValidationMessageFor(writer => writer.Password)</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                <label>Hakkınızda*</label>
+                                @Html.TextAreaFor(writer => writer.About, new { @class = "form-control" })
+                                <label class="text-danger">@Html.ValidationMessageFor(writer => writer.About)</label>
+                            </div>
+                            <!-- /.form-group -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-12 col-sm-6">
+                            <div class="form-group">
+                                    <label>Resminiz</label>
+                                    @Html.TextBoxFor(writer => writer.Image, new { @class = "form-control" })
+                                    <label class="text-danger">@Html.ValidationMessageFor(writer => writer.Image)</label>
+                                </div>
+                            </div>
+                        </div>
+                    <button class="btn btn-primary">Yazar Ekle</button>
+                    </div>
+                </div>
+            </div>
+        
+    </section>
+    
+
+}
