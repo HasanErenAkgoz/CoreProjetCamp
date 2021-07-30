@@ -45,6 +45,12 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<MessageDal>().As<IMessageDal>().SingleInstance();
 
 
+            builder.RegisterType<ImagesManager>().As<IImagesService>().SingleInstance();
+            builder.RegisterType<EfImagesDal>().As<IImagesDal>().SingleInstance();
+
+            builder.RegisterType<AdminManager>().As<IAdminService>().SingleInstance();
+            builder.RegisterType<EfAdminDal>().As<IAdminDal>().SingleInstance();
+
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
             builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()

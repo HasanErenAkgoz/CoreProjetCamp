@@ -14,7 +14,6 @@ namespace DataAccess.Concrate.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-DR7EADTJ\SQLEXPRESS;Initial Catalog=DbProjetCamp;Integrated Security=True");
-            optionsBuilder.UseLazyLoadingProxies();
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -24,6 +23,8 @@ namespace DataAccess.Concrate.EntityFramework
         public DbSet<Writer> Writers { get; set; }
         public DbSet<BadgeStyle> BadgeStyles { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Admin> Admins { get; set; }
     }
 
 }

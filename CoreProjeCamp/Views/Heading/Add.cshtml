@@ -24,6 +24,6 @@
         <label>Yazar Adı</label>
         @Html.DropDownListFor(heading => heading.WriterId, (List<SelectListItem>)ViewBag.writerName, new { @class = "form-control" })
         <label class="text-danger">@Html.ValidationMessageFor(error => error.WriterId)</label>
-        <button class="btn btn-success">Başlık Ekle</button>
+        <button style="margin-top:10px" class="btn btn-success">Başlık Ekle</button>
     </form>
 }

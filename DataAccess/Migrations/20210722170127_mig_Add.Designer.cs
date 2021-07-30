@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210717234648_mig_update")]
-    partial class mig_update
+    [Migration("20210722170127_mig_Add")]
+    partial class mig_Add
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -192,6 +192,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("Receiver")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<bool>("Status")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Subject")
                         .HasMaxLength(50)

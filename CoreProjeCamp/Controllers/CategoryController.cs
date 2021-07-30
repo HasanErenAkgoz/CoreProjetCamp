@@ -5,8 +5,11 @@ using Business.ValidationRules.FluentValidation;
 using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +22,7 @@ namespace CoreProjeCamp.Controllers
 
         ICategoryService _categoryService;
         IBadgeStyleService _badgeStyleService;
+
         public CategoryController(ICategoryService categoryService, IBadgeStyleService badgeStyleService)
         {
             _categoryService = categoryService;
@@ -28,9 +32,12 @@ namespace CoreProjeCamp.Controllers
         {
             var result = _categoryService.GetAll();
 
-            if (result != null)
+            if (result.Success)
             {
+                ViewBag.data = HttpContext.Session.GetString("Email");
+
                 return View(result.Data);
+
 
             }
             return View(result.Message);

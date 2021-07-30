@@ -28,7 +28,7 @@ namespace Business.Concrate
 
         public IResult Delete(Heading heading)
         {
-            IResult result= BusinessRules.Run(HeadingStatusValue(heading));
+            IResult result= BusinessRules.Run(StatusValue(heading));
             _headingDal.Update(heading);
             return new SuccessResult(Messages.ItemDeleted);
 
@@ -57,7 +57,7 @@ namespace Business.Concrate
             return new SuccessResult(Messages.ItemUpdated);
         }
 
-        private IResult HeadingStatusValue(Heading heading)
+        private IResult StatusValue(Heading heading)
         {
             if (heading.Status == true)
             {

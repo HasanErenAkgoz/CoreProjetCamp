@@ -18,5 +18,6 @@ namespace Entity.Concrate
         [StringLength(50, ErrorMessage = "Lütfen 50 Karekterden Uzun Veri Girmeyiniz")]
         public string Subject { get; set; }
         public string Message { get; set; }
+        public bool IsDeleted { get; set; }
     }
 }

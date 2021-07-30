@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class mig_update : Migration
+    public partial class mig_v1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

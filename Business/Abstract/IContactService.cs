@@ -18,5 +18,7 @@ namespace Business.Abstract
 
         IDataResult<List<Contact>> GetAll();
         IDataResult<Contact> GetById(int id);
+
+        IDataResult<List<Contact>> TrashList();
     }
 }

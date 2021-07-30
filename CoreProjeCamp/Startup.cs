@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Session;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -23,40 +25,52 @@ namespace CoreProjeCamp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            services.AddMvc(options => options.EnableEndpointRouting     = false);
-            //services.AddMvc(confif =>
-            //{
-            //    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build()
-            //    ; confif.Filters.Add(new AuthorizeFilter(policy));
-            //});
-            //services.AddAuthentication(
-            //    CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x =>
-            //    {
-            //        x.LoginPath = "/Login/Index";
-            //    });
-         
+            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Login/Index";
+                    options.Cookie.Name = "AshProgHelpCookie";
+                });
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder().
+                    RequireAuthenticatedUser()
+                    .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+            services.AddSession();
 
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseMvcWithDefaultRoute();
-            app.UseRouting();
-            app.UseStaticFiles();
-            app.UseRouting();
-            app.UseAuthorization();
-            app.UseMvc(routes =>
+            else
             {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Category}/{action=Index}/{id?}");
+                app.UseExceptionHandler("/Error/Index");
+                app.UseHsts();
+            }
 
+            app.UseStaticFiles();
+            app.UseSession();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseCookiePolicy();
+            app.UseEndpoints(routes =>
+            {
+                routes.MapControllerRoute(name: "defalut", pattern: "{Controller=Login}/{Action=Index}/{id?}");
             });
+
+
+
+
         }
     }
 }

@@ -40,6 +40,12 @@ namespace Business.Concrate
             return new DataResult<Contact>(_contactDal.Get(contact => contact.Id == id), Messages.ItemsListed);
         }
 
+        public IDataResult<List<Contact>> TrashList()
+        {
+            return new SuccessDataResult<List<Contact>>(_contactDal.GetAll(trash => trash.IsDeleted == true), Messages.ItemsListed);
+
+        }
+
         public IResult Update(Contact contact)
         {
             _contactDal.Update(contact);

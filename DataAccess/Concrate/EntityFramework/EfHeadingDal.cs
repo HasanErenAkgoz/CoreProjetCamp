@@ -25,7 +25,7 @@ namespace DataAccess.Concrate.EntityFramework
                              on heaidng.WriterId equals writer.Id
                              select new HeadingDTO
                              {
-                                 Id=writer.Id,
+                                 Id=heaidng.Id,
                                  Name = heaidng.Name,
                                  Date = heaidng.Date,
                                  CategoryName = category.Name,

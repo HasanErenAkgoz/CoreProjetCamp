@@ -1,0 +1,84 @@
+﻿@model Entity.Concrate.Message
+@{
+    ViewData["Title"] = "GetMessageDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<body class="hold-transition sidebar-mini">
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Mesajlar</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                @Html.Partial("LeftMenu")
+                <div class="col-md-9">
+                  
+                    <div class="card card-primary card-outline">
+
+                        <div class="card-body p-0">
+                            <div class="mailbox-controls">
+                                <!-- Check all button -->
+                               
+                                <!-- /.btn-group -->
+                                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+                                <div class="float-right">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+                                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+                                    </div>
+                                    <!-- /.btn-group -->
+                                </div>
+                                <!-- /.float-right -->
+                            </div>
+                            <div class="mailbox-read-info">
+                                <h5>Konu: @Html.DisplayFor(x => x.Subject) </h5>
+                                <hr />
+                                <h6>
+                                    <strong> Alıcı: @Html.DisplayFor(x => x.Receiver)</strong>
+                                    <span class="mailbox-read-time float-right"></span>
+                                </h6>
+                                <h6>
+                                    <strong> Gönderici: @Html.DisplayFor(x => x.sender)</strong>
+                                    <span class="mailbox-read-time float-right">@Model.Date.ToString("dd-MMM-yyyy")</span>
+                                </h6>
+                            </div>
+                            <div class="mailbox-read-message">
+                                <p>  @Html.Raw(Model.Content)</p>
+
+                            </div>
+                            <div class="mailbox-controls with-border text-center">
+                                <div class="btn-group">
+                                    <a href="~/Messages/Delete/@Model.Id" class="btn btn-default btn-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                    <a href="~/Messages/TrashOperation/@Model.Id" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body" title="Draft">
+                                        <i class="fas fa-recycle"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <!-- /.mailbox-read-message -->
+                        </div>
+
+                        <!-- /.card-footer -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </div>
+    </section>
+</body>
+</html>

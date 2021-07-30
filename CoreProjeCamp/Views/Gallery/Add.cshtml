@@ -1,0 +1,21 @@
+﻿@model Entity.Concrate.Image
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<center><h2>Resim Ekleme</h2></center>
+<br />
+@using (Html.BeginForm("Add", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<form>
+    <label>Resminizin Adı</label>
+    <input type="text" name="Name" class="form-control" />
+    <hr />
+    <label>Lütfen Resminizi Seçiniz</label>
+    <input type="file" name="Image" class="form-control" />
+</form>
+}
+
+
+

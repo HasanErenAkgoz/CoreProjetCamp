@@ -38,7 +38,6 @@ namespace CoreProjetCamp.Controllers
                 return View(result.Data);
             }
             else
-
                 return View(result.Message);
         }
         [HttpGet]

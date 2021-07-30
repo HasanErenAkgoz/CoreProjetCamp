@@ -18,8 +18,8 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(category => category.Mail).NotNull().WithMessage(Messages.NotNull);
             RuleFor(category => category.About).NotNull().WithMessage(Messages.NotNull);
             RuleFor(category => category.Password).NotNull().WithMessage(Messages.NotNull);
-            RuleFor(category => category.About).Must(x => x != null && x.ToUpper().Contains("A"))
-            .WithMessage("Hakkında kısmında en az bir a harfi içermelidir");
+            //RuleFor(category => category.About).Must(x => x != null && x.ToUpper().Contains("A"))
+            //.WithMessage("Hakkında kısmında en az bir a harfi içermelidir");
         }
     }
 }
