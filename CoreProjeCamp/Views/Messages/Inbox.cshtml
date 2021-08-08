@@ -83,10 +83,42 @@
                                             <td class="mailbox-star"><a href="~/Messages/GetMessageDetail/@item.Id"><i class="fas fa-star text-warning"></i></a></td>
                                             <td class="mailbox-name"><a href="~/Messages/GetMessageDetail/@item.Id">@item.sender</a></td>
                                             <td class="mailbox-subject">
-                                                <b>@item.Subject</b> - @Html.Raw(@item.Content.Substring(0, 30))...
+                                                @if (item.Content.Length > 30)
+                                                {
+                                                    <b>@item.Subject</b> @Html.Raw(@item.Content.Substring(0, 30))
+
+                                                }
+                                                else
+                                                {
+                                                    <b>@item.Subject</b> @Html.Raw(@item.Content)
+                                                }
                                             </td>
                                             <td class="mailbox-attachment"></td>
                                             <td class="mailbox-date">@item.Date.ToShortDateString()</td>
+                                            @if (item.IsRead == false)
+                                            {
+                                        <td>
+                                            <a class="btn btn-info btn-sm" href="~/Messages/IsReadValues/@item.Id">
+                                                <i class="fas fa-pencil-alt">
+                                                </i>
+                                                Okundu olarak işaretle
+
+                                            </a>
+
+                                        </td>
+
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <a class="btn btn-danger btn-sm"  href="~/Messages/IsReadValues/@item.Id">
+                                                        <i class="fas fa-pencil-alt">
+                                                            Okunmadı olarak işaretle
+                                                        </i>
+                                                    </a>
+                                                </td>
+                                            }
+
                                         </tr>
                                     }
                                 </tbody>

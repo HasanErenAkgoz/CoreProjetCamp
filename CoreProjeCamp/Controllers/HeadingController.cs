@@ -1,18 +1,18 @@
 ﻿using Business.Abstract;
-using Business.Concrate;
 using DataAccess.Concrate.EntityFramework;
+using Entity.Concrate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
-using System.Web;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using Entity.Concrate;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CoreProjetCamp.Controllers
 {
+    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Yazar")]
+
     public class HeadingController : Controller
     {
         IHeadingService _headingService;

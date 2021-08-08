@@ -1,0 +1,29 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Yetenek Ekleme</title>
+</head>
+<body>
+    <center><h2>Yetenek Ekleme</h2></center>
+    <br />
+    @using(Html.BeginForm("SkilssAdd","Skilss",FormMethod.Post))
+            {
+                <form>
+                    <label>Yetenek Adı</label>
+                    <input type="text" name="Skilss" />
+                    <br />
+                    <label>Yetenek Değeri</label>
+                    <input type="number" name="Value" />
+                    <br />
+                    <button class="btn btn-success">Yetenek Ekle</button>
+                </form>
+            }
+</body>
+</html>

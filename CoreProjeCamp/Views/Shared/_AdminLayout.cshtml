@@ -18,7 +18,7 @@
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-  
+
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="index3.html" class="brand-link">
                 <img src="~/Themes/AdminLTE-3.0.4/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
@@ -31,163 +31,220 @@
                         <img src="~/Themes/AdminLTE-3.0.4/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <span class="brand-text font-weight-light">Admin Paneli</span>
+                        <span class="brand-text" style="color:white">@User.Identity.Name</span>
                     </div>
                 </div>
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    
-                        <li class="nav-item has-">
-                            <a href="~/Category/Index" class="nav-link">
-                                <i class="nav-icon fas fa-tachometer-alt"></i>
-                                <p>
-                                    Kategoriler
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-newspaper"></i>
-                                <p>
-                                    Başlık İşlemleri
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="~/Heading/Index" class="nav-link">
-                                        <i class="fas fa-book-reader"></i>
-                                        <p>Başlık Bilgileri</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Heading/Add" class="nav-link">
-                                        <i class="fas fa-plus"></i>
-                                        <p>Başlık Ekle</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-pen"></i>
-                                <p>
-                                    Yazar İşlemleri
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
+                        @if (User.IsInRole("Admin"))
+                        {
 
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="~/Writer/Index" class="nav-link">
-                                        <i class="fas fa-clipboard-list"></i>
-                                        <p>Yazar Bilgileri</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="~/Writer/Add" class="nav-link">
-                                        <i class="fas fa-user-check"></i>
-                                        <p>Yazar Ekle</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-chart-pie"></i>
-                                <p>
-                                    Grafikler
-                                    <i class="right fas fa-angle-left"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Grafik 1</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Grafik 2</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="pages/charts/inline.html" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Grafik 3</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-tree"></i>
-                                <p>
-                                    Hakkımızda
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="~/Contact/Index" class="nav-link">
-                                <i class="nav-icon fas fa-edit"></i>
-                                <p>
-                                    İletişim & Mesajlar
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-table"></i>
-                                <p>
-                                    Yazılar
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
-                                <i class="nav-icon fas fa-calendar-alt"></i>
-                                <p>
-                                    Yetkilendirmeler
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="pages/gallery.html" class="nav-link">
-                                <i class="nav-icon far fa-image"></i>
-                                <p>
-                                    Galeri
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon far fa-envelope"></i>
-                                <p>
-                                    Hata Sayfaları
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-book"></i>
-                                <p>
-                                    Siteye Git
-                                </p>
-                            </a>
+                            <li class="nav-item has-">
+                                <a href="~/Account/GetByList" class="nav-link">
+                                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                                    <p>
+                                        Profil Ayarları
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-">
+                                <a href="~/Category/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-th-list"></i>
+                                    <p>
+                                        Kategori İşlemleri
+                                    </p>
+                                </a>
+                            </li>
 
-                        </li>
-                        <li class="nav-item has-treeview">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-apple-alt"></i>
-                                <p>
-                                    Çıkış yap
-                                </p>
-                            </a>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-newspaper"></i>
+                                    <p>
+                                        Başlık İşlemleri
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Heading/Index" class="nav-link">
+                                            <i class="fas fa-book-reader"></i>
+                                            <p>Başlık Bilgileri</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="~/Heading/Add" class="nav-link">
+                                            <i class="fas fa-plus"></i>
+                                            <p>Başlık Ekle</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-pen"></i>
+                                    <p>
+                                        Yazar İşlemleri
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
 
-                        </li>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Writer/Index" class="nav-link">
+                                            <i class="fas fa-clipboard-list"></i>
+                                            <p>Yazar Bilgileri</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="~/Writer/Add" class="nav-link">
+                                            <i class="fas fa-user-check"></i>
+                                            <p>Yazar Ekle</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-chart-pie"></i>
+                                    <p>
+                                        Grafikler
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="pages/charts/chartjs.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Grafik 1</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/charts/flot.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Grafik 2</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="pages/charts/inline.html" class="nav-link">
+                                            <i class="far fa-circle nav-icon"></i>
+                                            <p>Grafik 3</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-tree"></i>
+                                    <p>
+                                        Hakkımızda
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="~/Contact/Index" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>
+                                        İletişim & Mesajlar
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-table"></i>
+                                    <p>
+                                        Yazılar
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/gallery.html" class="nav-link">
+                                    <i class="nav-icon far fa-image"></i>
+                                    <p>
+                                        Galeri
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon far fa-envelope"></i>
+                                    <p>
+                                        Hata Sayfaları
+                                        <i class="fas fa-angle-left right"></i>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-user-tag"></i>
+                                    <p>
+                                        Yetkilendirme
+                                        <i class="right fas fa-angle-left"></i>
+                                    </p>
+                                </a>
+
+                                <ul class="nav nav-treeview">
+                                    <li class="nav-item">
+                                        <a href="~/Role/CreateRole" class="nav-link">
+                                            <i class="fas fa-pencil-ruler"></i>
+                                            <p>Role Ekle</p>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="~/User/UserList" class="nav-link">
+                                            <i class="far fa-plus-square"></i>
+                                            <p>Yetki Ataması Yap</p>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            if (User.IsInRole("Admin"))
+                            {
+
+
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-star"></i>
+                                        <p>
+                                            Yetenek Alanım
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="~/Skilss/SkilssCard" class="nav-link">
+                                                <i class="fas fa-pencil-ruler"></i>
+                                                <p>Yeteneklerim</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="~/Skilss/SkilssAdd" class="nav-link">
+                                                <i class="far fa-plus-square"></i>
+                                                <p>Yetenek Ekle</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            <li class="nav-item has-treeview">
+                                <a href="#" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>
+                                        Siteye Git
+                                    </p>
+                                </a>
+
+                            </li>
+                            <li class="nav-item has-treeview">
+                                <a href="~/Account/Logout" class="nav-link">
+                                    <i class="nav-icon fas fa-apple-alt"></i>
+                                    <p>
+                                        Çıkış yap
+                                    </p>
+                                </a>
+
+                            </li>
+                        }
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->

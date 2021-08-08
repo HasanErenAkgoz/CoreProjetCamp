@@ -4,11 +4,9 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrate;
+using Entity.Identity;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrate
 {
@@ -19,11 +17,15 @@ namespace Business.Concrate
         {
             _messageDal = messageDal;
         }
-        public IResult Add(Message message)
+        public IResult Add(Message message, string email)
         {
             message.IsDeleted = false;
             message.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
-            message.sender = "admin@gmail.com";
+            message.sender = email;
+            message.Receiver = message.Receiver;
+            message.DraftStatus = false;
+            message.IsRead = false;
+            message.IsDeleted = false;
             _messageDal.Add(message);
             return new SuccessResult(Messages.ItemAdded);
         }
@@ -49,22 +51,24 @@ namespace Business.Concrate
 
         public IDataResult<List<Message>> GetAll()
         {
-            return new SuccessDataResult<List<Message>>(_messageDal.GetAll(x => x.Receiver == "admin@gmail.com"&&x.IsDeleted==false&&x.DraftStatus==false), Messages.ItemsListed);
+            return new SuccessDataResult<List<Message>>(_messageDal.GetAll(x => x.Receiver == "admin@gmail.com" && x.IsDeleted == false && x.DraftStatus == false), Messages.ItemsListed);
         }
 
         public IDataResult<Message> GetById(int id)
         {
+
             return new DataResult<Message>(_messageDal.Get(message => message.Id == id), Messages.ItemsListed);
+
         }
 
-        public IDataResult<List<Message>> GetListInbox()
+        public IDataResult<List<Message>> GetListInbox(string email)
         {
-            return new SuccessDataResult<List<Message>>(_messageDal.GetAll(x => x.Receiver == "admin@gmail.com" && x.IsDeleted == false && x.DraftStatus == false), Messages.ItemsListed);
+            return new SuccessDataResult<List<Message>>(_messageDal.GetAll(x => x.Receiver == email && x.IsDeleted == false && x.DraftStatus == false), Messages.ItemsListed);
         }
 
-        public IDataResult<List<Message>> GetListSendBox()
+        public IDataResult<List<Message>> GetListSendBox(string email)
         {
-            return new SuccessDataResult<List<Message>>(_messageDal.GetAll(x => x.sender == "admin@gmail.com" && x.IsDeleted == false && x.DraftStatus == false), Messages.ItemsListed);
+            return new SuccessDataResult<List<Message>>(_messageDal.GetAll(x => x.sender == email && x.IsDeleted == false && x.DraftStatus == false), Messages.ItemsListed);
         }
 
         public IDataResult<List<Message>> TrashList()
@@ -94,7 +98,9 @@ namespace Business.Concrate
             else
                 message.DraftStatus = false;
             return new SuccessResult();
+
         }
+
 
     }
 }

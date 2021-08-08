@@ -1,10 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrate;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
@@ -15,8 +11,7 @@ namespace Business.Abstract
         IResult Update(Writer writer);
 
         IResult Delete(Writer writer);
-
         IDataResult<List<Writer>> GetAll();
-       IDataResult<Writer> GetById(int id);
+        IDataResult<Writer> GetById(int id);
     }
 }

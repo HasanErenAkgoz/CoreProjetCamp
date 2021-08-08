@@ -1,14 +1,10 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrate;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-  public  interface IAboutService
+    public interface IAboutService
     {
         IResult Add(About about);
 
@@ -17,7 +13,7 @@ namespace Business.Abstract
         IResult Delete(About about);
 
         IDataResult<List<About>> GetAll();
-      IDataResult<About> GetById(int id);
+        IDataResult<About> GetById(int id);
 
     }
 }

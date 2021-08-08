@@ -1,16 +1,13 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrate;
-using System;
+using Entity.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
     public interface IMessageService
     {
-        IResult Add(Message message);
+        IResult Add(Message message,string email);
 
         IResult Update(Message message);
 
@@ -20,12 +17,12 @@ namespace Business.Abstract
         IDataResult<List<Message>> GetAll();
 
         IDataResult<Message> GetById(int id);
-        IDataResult<List<Message>> GetListInbox();
-        IDataResult<List<Message>> GetListSendBox();
+        IDataResult<List<Message>> GetListInbox(string email);
+        IDataResult<List<Message>> GetListSendBox(string email);
         IDataResult<List<Message>> DraftList();
         IDataResult<List<Message>> TrashList();
 
-        
+
 
     }
 }

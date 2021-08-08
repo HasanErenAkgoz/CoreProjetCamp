@@ -6,6 +6,9 @@
     table {
         margin: auto;
     }
+    i{
+        margin-right:5px;
+    }
 </style>
 <!DOCTYPE html>
 <link href="~/twitter-bootstrap/css/bootstrap.css" rel="stylesheet" />
@@ -25,11 +28,12 @@
 <tr>
     <th>@item.Id</th>
     <td>@item.Name</td>
-    <td><a href="~/Category/Delete/@item.Id" class="btn btn-danger">Sil</a> <a href="~/Category/EditCategory/@item.Id" class="btn btn-warning">Güncelle</a> <a href="#" class="btn btn-primary">Başlıklar</a></td>
+    <td><a href="~/Category/Delete/@item.Id" class="btn btn-danger btn-sm"><i class="fas fa-trash"></i>   Sil</a> <a href="~/Category/EditCategory/@item.Id" class="btn btn-warning btn-sm"><i class="fas fa-pen-alt"></i>Güncelle</a> <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-feather"></i>Başlıklar</a></td>
 
-</tr>}
+</tr>
+}
     </tbody>
-    
+
 </table>
 <a href="~/Category/Add" class="btn btn-primary">Kategori Ekle</a>
 @ViewBag.data

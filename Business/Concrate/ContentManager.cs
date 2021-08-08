@@ -2,15 +2,10 @@
 using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
 using Entity.Dtos;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrate
 {
@@ -39,7 +34,7 @@ namespace Business.Concrate
         public IDataResult<List<ContentsDTO>> GetAll()
         {
             return new SuccessDataResult<List<ContentsDTO>>(_contentDal.ContentDto(), Messages.ItemsListed);
-         
+
         }
 
         public IDataResult<Content> GetById(int id)

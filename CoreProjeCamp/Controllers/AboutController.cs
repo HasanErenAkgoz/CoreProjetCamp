@@ -1,10 +1,6 @@
 ﻿using Business.Abstract;
 using Entity.Concrate;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreProjetCamp.Controllers
 {
@@ -13,7 +9,7 @@ namespace CoreProjetCamp.Controllers
         IAboutService _aboutService;
         public AboutController(IAboutService aboutService)
         {
-            _aboutService= aboutService;
+            _aboutService = aboutService;
         }
         public IActionResult Index()
         {
@@ -23,7 +19,7 @@ namespace CoreProjetCamp.Controllers
                 return View(result.Data);
             }
             else
-            return View(result.Data);
+                return View(result.Data);
         }
         [HttpGet]
         public IActionResult Add()
@@ -39,7 +35,7 @@ namespace CoreProjetCamp.Controllers
                 return RedirectToAction("Index");
             }
             else
-            return View();
+                return View();
         }
         public PartialViewResult partialAdd(About about)
         {

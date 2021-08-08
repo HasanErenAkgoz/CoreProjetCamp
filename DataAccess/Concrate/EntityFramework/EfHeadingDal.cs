@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrate.EntityFramework
 {
@@ -25,19 +23,19 @@ namespace DataAccess.Concrate.EntityFramework
                              on heaidng.WriterId equals writer.Id
                              select new HeadingDTO
                              {
-                                 Id=heaidng.Id,
+                                 Id = heaidng.Id,
                                  Name = heaidng.Name,
                                  Date = heaidng.Date,
                                  CategoryName = category.Name,
                                  WriterName = writer.Name,
                                  WriterSurname = writer.Surname,
-                                 WriterImage=writer.Image,
+                                 WriterImage = writer.Image,
                                  Status = heaidng.Status,
-                                 BadgeStyle=category.BadgeStyle.Name
-                                 
+                                 BadgeStyle = category.BadgeStyle.Name
 
 
-                             }; 
+
+                             };
                 return filter == null ? result.ToList() : result.Where(filter).ToList();
 
             }

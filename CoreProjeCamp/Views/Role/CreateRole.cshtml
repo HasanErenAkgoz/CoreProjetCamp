@@ -1,0 +1,26 @@
+﻿
+@model Entity.ViewModel.RoleViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "CreateRole";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<br />
+<center><h4>Rol Oluştur</h4></center>
+<hr />
+        <form style="margin-left:5px" asp-action="CreateRole">
+            @Html.ValidationSummary()
+            <div >
+            <label>Yetkiye Vermek itediğiniz ismi giriniz</label>
+              <input type="text" name="Name" class="form-control"/>
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div>
+                <br />
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+
+ 

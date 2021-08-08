@@ -3,11 +3,7 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrate;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrate
 {
@@ -36,9 +32,9 @@ namespace Business.Concrate
         }
 
         public IDataResult<About> GetById(int id) // IDataResult inan bana hic gerek yok aslında :) hocam katıldığım bir eğitimde hoca kullanıyordu ondan kullanıyorum
-            // Değiştirmek zorunda değilsin sadece bilgin olsun
+                                                  // Değiştirmek zorunda değilsin sadece bilgin olsun
         {
-            return new SuccessDataResult<About>(_aboutDal.Get(about=>about.Id == id), Messages.ItemsListed);
+            return new SuccessDataResult<About>(_aboutDal.Get(about => about.Id == id), Messages.ItemsListed);
         }
 
         public IResult Update(About about)

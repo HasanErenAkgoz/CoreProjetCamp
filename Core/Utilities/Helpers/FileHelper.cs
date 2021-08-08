@@ -1,5 +1,4 @@
-﻿using Core.Utilities.Results;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.IO;
 
@@ -38,7 +37,7 @@ namespace Core.Utilities.Helpers
         }
         public static string NewPath(string file)
         {
-            string path = Environment.CurrentDirectory + @"\wwwroot\images\";
+            string path = Environment.CurrentDirectory + @"\wwwroot\Images\";
 
             string result = $@"{path}\{file}";
             return result;

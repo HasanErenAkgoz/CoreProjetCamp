@@ -1,15 +1,15 @@
 ﻿using Business.Abstract;
-using Business.Concrate;
 using Business.ValidationRules.FluentValidation;
-using DataAccess.Abstract;
-using DataAccess.Concrate.EntityFramework;
+using DataAccess.IdentitysContext;
 using Entity.Concrate;
+using Entity.Identity;
+using Entity.ViewModel;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreProjetCamp.Controllers
 {
@@ -22,6 +22,7 @@ namespace CoreProjetCamp.Controllers
         }
         public IActionResult Index()
         {
+
             var result = _writerService.GetAll();
             if (result != null)
             {
@@ -37,22 +38,14 @@ namespace CoreProjetCamp.Controllers
         [HttpPost]
         public IActionResult Add(Writer writer)
         {
-            WriterValidator writerValidator = new WriterValidator();
-            ValidationResult validationResult = writerValidator.Validate(writer);
-            if (validationResult.IsValid)
-            {
-                writer.Status = true;
-                _writerService.Add(writer);
-                return RedirectToAction("Index");
-            }
-            else
-            {
-                foreach (var item in validationResult.Errors)
-                {
-                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
-                }
-            }
-            return View();
+
+
+            writer.Status = true;
+            _writerService.Add(writer);
+            return RedirectToAction("Index");
+
+
         }
+
     }
 }

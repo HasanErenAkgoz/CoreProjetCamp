@@ -5,11 +5,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrate;
 using Entity.Dtos;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrate
 {
@@ -28,7 +24,7 @@ namespace Business.Concrate
 
         public IResult Delete(Heading heading)
         {
-            IResult result= BusinessRules.Run(StatusValue(heading));
+            IResult result = BusinessRules.Run(StatusValue(heading));
             _headingDal.Update(heading);
             return new SuccessResult(Messages.ItemDeleted);
 

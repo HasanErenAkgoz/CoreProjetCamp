@@ -3,47 +3,47 @@ using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrate;
-using System;
+using Entity.Identity;
+using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrate
 {
     public class WriterManager : IWriterService
     {
         IWriterDal _writerDal;
-        public WriterManager(IWriterDal writerDal)
+        private RoleManager<AppRole> _roleManager;
+        public WriterManager(IWriterDal writerDal, RoleManager<AppRole> role)
         {
             _writerDal = writerDal;
+            _roleManager = role;
         }
+
         public IResult Add(Writer writer)
         {
             _writerDal.Add(writer);
-            return new SuccessResult(Messages.ItemAdded);
+            return new SuccessResult();
         }
 
         public IResult Delete(Writer writer)
         {
-            _writerDal.Delete(writer);
-            return new SuccessResult(Messages.ItemDeleted);
+            throw new System.NotImplementedException();
         }
 
         public IDataResult<List<Writer>> GetAll()
         {
+            AppRole app = new AppRole();
             return new SuccessDataResult<List<Writer>>(_writerDal.GetAll(), Messages.ItemsListed);
         }
-
         public IDataResult<Writer> GetById(int id)
         {
-            return new SuccessDataResult<Writer>(_writerDal.Get(category=>category.Id==id), Messages.ItemsListed);
+            return new SuccessDataResult<Writer>(_writerDal.Get(category => category.Id == id), Messages.ItemsListed);
         }
 
         public IResult Update(Writer writer)
         {
             _writerDal.Update(writer);
-            return new SuccessResult(Messages.ItemUpdated);
+            return new SuccessResult();
         }
     }
 }

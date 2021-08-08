@@ -8,10 +8,8 @@ using Business.Abstract;
 using Business.Concrate;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
-using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrate.EntityFramework;
-using Microsoft.AspNetCore.Http;
 
 namespace Business.DependencyResolvers.Autofac
 {
@@ -48,8 +46,10 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<ImagesManager>().As<IImagesService>().SingleInstance();
             builder.RegisterType<EfImagesDal>().As<IImagesDal>().SingleInstance();
 
-            builder.RegisterType<AdminManager>().As<IAdminService>().SingleInstance();
-            builder.RegisterType<EfAdminDal>().As<IAdminDal>().SingleInstance();
+            builder.RegisterType<SkilssCardManager>().As<ISkilssCardService>().SingleInstance();
+            builder.RegisterType<EfSkilssCardDal>().As<ISkilssCardDal>().SingleInstance();
+
+
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 

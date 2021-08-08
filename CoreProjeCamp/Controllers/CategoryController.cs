@@ -1,22 +1,16 @@
 ﻿using Business.Abstract;
-using Business.Concrate;
-using Business.Constants;
-using Business.ValidationRules.FluentValidation;
-using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
-using FluentValidation.Results;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CoreProjeCamp.Controllers
 {
+    [Authorize()]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
 
@@ -37,8 +31,6 @@ namespace CoreProjeCamp.Controllers
                 ViewBag.data = HttpContext.Session.GetString("Email");
 
                 return View(result.Data);
-
-
             }
             return View(result.Message);
         }

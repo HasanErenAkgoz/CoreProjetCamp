@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
 using DataAccess.Concrate.EntityFramework;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -45,11 +46,11 @@ namespace CoreProjetCamp.Controllers
         {
             using (var context = new Context())
             {
-                var sendMailCount = context.Messages.Count(x => x.sender == "admin@gmail.com").ToString();
-                ViewBag.sendMailCount = sendMailCount;
+                var sendMailReadCount = context.Messages.Count(x => x.sender == HttpContext.Session.GetString("Email") && x.IsRead == false).ToString();
+                ViewBag.sendMailCount = sendMailReadCount;
 
-                var receiverMailCount = context.Messages.Count(x => x.Receiver == "admin@gmail.com").ToString();
-                ViewBag.receiverMailCount = receiverMailCount;
+                var receiverReardValue = context.Messages.Count(x => x.Receiver == HttpContext.Session.GetString("Email") && x.IsRead == false).ToString();
+                ViewBag.receiverMailCount = receiverReardValue;
 
                 var contactMailCount = context.Contacts.Count().ToString();
                 ViewBag.contactMailCount = contactMailCount;
@@ -60,7 +61,6 @@ namespace CoreProjetCamp.Controllers
                 var trashMailCount = context.Messages.Count(x => x.IsDeleted == true).ToString();
                 ViewBag.trashMailCount = trashMailCount;
             }
-
         }
 
 

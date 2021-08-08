@@ -1,14 +1,12 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
-using Core.Utilities.Business;
-using Core.Utilities.Results;
-using DataAccess.Abstract;
 using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
+using Entity.Identity;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,15 +16,17 @@ namespace CoreProjetCamp.Controllers
     {
         IMessageService _messageService;
         MessagesValidator messagesValidator = new MessagesValidator();
-        public MessagesController(IMessageService messageService)
+        private UserManager<AppUser> _userManager;
+        public MessagesController(IMessageService messageService, UserManager<AppUser> userManager)
         {
             _messageService = messageService;
+            _userManager = userManager;
         }
 
         public IActionResult Inbox()
         {
             leftMenuCount();
-            var result = _messageService.GetAll();
+            var result = _messageService.GetListInbox(HttpContext.Session.GetString("Email"));
             if (result.Success)
             {
                 return View(result.Data);
@@ -38,7 +38,7 @@ namespace CoreProjetCamp.Controllers
         {
 
             leftMenuCount();
-            var result = _messageService.GetListSendBox();
+            var result = _messageService.GetListSendBox(HttpContext.Session.GetString("Email"));
             if (result.Success)
             {
                 return View(result.Data);
@@ -58,7 +58,7 @@ namespace CoreProjetCamp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add(Message message, string button)
+        public async Task<IActionResult> Add(Message message, string button)
         {
             ValidationResult validationResult = messagesValidator.Validate(message);
             if (button == "add")
@@ -66,7 +66,7 @@ namespace CoreProjetCamp.Controllers
                 if (validationResult.IsValid)
                 {
                     message.DraftStatus = false;
-                    _messageService.Add(message);
+                    _messageService.Add(message, HttpContext.Session.GetString("Email"));
                     return RedirectToAction("Sendbox");
                 }
                 else
@@ -82,7 +82,7 @@ namespace CoreProjetCamp.Controllers
                 if (validationResult.IsValid)
                 {
                     message.DraftStatus = true;
-                    _messageService.Add(message);
+                    _messageService.Add(message, HttpContext.Session.GetString("Email"));
                     return RedirectToAction("Draft");
                 }
                 else
@@ -116,7 +116,7 @@ namespace CoreProjetCamp.Controllers
                 return View(result.Data);
             }
             else
-            return View();
+                return View();
         }
         public IActionResult Delete(int id)
         {
@@ -134,18 +134,21 @@ namespace CoreProjetCamp.Controllers
         }
         public IActionResult GetMessageDetail(int id)
         {
+            leftMenuCount();
             var result = _messageService.GetById(id).Data;
+            IsReadValue(id);
+
             return View(result);
         }
         public void leftMenuCount()
         {
             using (var context = new Context())
             {
-                var sendMailCount = context.Messages.Count(x => x.sender == "admin@gmail.com").ToString();
-                ViewBag.sendMailCount = sendMailCount;
+                var sendMailReadCount = context.Messages.Count(x => x.sender == HttpContext.Session.GetString("Email") && x.IsRead == false).ToString();
+                ViewBag.sendMailCount = sendMailReadCount;
 
-                var receiverMailCount = context.Messages.Count(x => x.Receiver == "admin@gmail.com").ToString();
-                ViewBag.receiverMailCount = receiverMailCount;
+                var receiverReardValue = context.Messages.Count(x => x.Receiver == HttpContext.Session.GetString("Email") && x.IsRead == false).ToString();
+                ViewBag.receiverMailCount = receiverReardValue;
 
                 var contactMailCount = context.Contacts.Count().ToString();
                 ViewBag.contactMailCount = contactMailCount;
@@ -158,6 +161,24 @@ namespace CoreProjetCamp.Controllers
             }
 
 
+        }
+
+        public void IsReadValue(int id)
+        {
+            var result = _messageService.GetById(id).Data;
+            if (result.IsRead == false)
+            {
+                result.IsRead = true;
+            }
+            else
+                result.IsRead = false;
+            _messageService.Update(result);
+        }
+        public IActionResult IsReadValues(int id)
+        {
+            IsReadValue(id);
+
+            return RedirectToAction("Inbox");
         }
 
         public PartialViewResult Operations()

@@ -1,9 +1,6 @@
 ﻿using Core.Utilities.Results;
 using Entity.Concrate;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Business.Abstract
 {

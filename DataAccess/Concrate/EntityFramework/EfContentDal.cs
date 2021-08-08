@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess.Concrate.EntityFramework
 {
@@ -28,16 +26,16 @@ namespace DataAccess.Concrate.EntityFramework
 
                              select new ContentsDTO
                              {
-                                 Id=content.Id,
+                                 Id = content.Id,
                                  WriterId = writer.Id,
-                                 HeadingId =heaading.Id,
-                                 Text=content.Text,
-                                 Date=content.Date,
-                                 HeadingName=heaading.Name,
-                                 WriterName=writer.Name,
-                                 WriterSurname=writer.Surname,
-                                 CategoryId=heaading.Category.Id,
-                                 CategoryName=heaading.Category.Name,
+                                 HeadingId = heaading.Id,
+                                 Text = content.Text,
+                                 Date = content.Date,
+                                 HeadingName = heaading.Name,
+                                 WriterName = writer.Name,
+                                 WriterSurname = writer.Surname,
+                                 CategoryId = heaading.Category.Id,
+                                 CategoryName = heaading.Category.Name,
                              };
 
                 return filter == null ? result.ToList() : result.Where(filter).ToList();

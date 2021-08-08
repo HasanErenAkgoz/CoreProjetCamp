@@ -3,34 +3,33 @@ using Business.Constants;
 using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
-using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
+using Entity.Identity;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.Concrate
 {
     public class ImagesManager : IImagesService
     {
         IImagesDal _ımagesDal;
-        public ImagesManager(IImagesDal ımagesDal)
+        private UserManager<AppUser> _userManager;
+        public ImagesManager(IImagesDal ımagesDal,UserManager<AppUser> userManager)
         {
             _ımagesDal = ımagesDal;
+            _userManager = userManager;
         }
 
         public IResult Add(IFormFile file, Image ımage)
         {
-
             ımage.ImagePath = FileHelper.Add(file);
             ımage.ImageDate = DateTime.Parse(DateTime.Now.ToString());
             _ımagesDal.Add(ımage);
             return new SuccessResult(Messages.ItemsListed);
         }
+
 
         public IResult Delete(Image ımage)
         {
@@ -45,7 +44,7 @@ namespace Business.Concrate
         public IDataResult<List<Image>> GetAll()
         {
             return new SuccessDataResult<List<Image>>(_ımagesDal.GetAll(), Messages.ItemsListed);
-     
+
         }
 
         public IResult Update(IFormFile file, Image ımage)

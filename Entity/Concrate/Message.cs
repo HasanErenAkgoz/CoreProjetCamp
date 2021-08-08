@@ -1,15 +1,11 @@
 ﻿using Core.Entities;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 
 namespace Entity.Concrate
 {
-   public class Message:IEntity
+    public class Message : IEntity
     {
         public int Id { get; set; }
         [StringLength(50)]
@@ -18,10 +14,11 @@ namespace Entity.Concrate
         public string Receiver { get; set; }
         [StringLength(50)]
         public string Subject { get; set; }
-        [AllowHtml ]
+        [AllowHtml]
         public string Content { get; set; }
         public DateTime Date { get; set; }
         public bool IsDeleted { get; set; }
         public bool DraftStatus { get; set; }
+        public bool IsRead { get; set; }
     }
 }
