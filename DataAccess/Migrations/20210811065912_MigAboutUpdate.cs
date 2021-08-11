@@ -2,7 +2,7 @@
 
 namespace DataAccess.Migrations
 {
-    public partial class MİgSkilss : Migration
+    public partial class MigAboutUpdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

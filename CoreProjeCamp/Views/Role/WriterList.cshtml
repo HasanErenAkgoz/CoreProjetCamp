@@ -1,10 +1,10 @@
-﻿@using Entity.Concrate
-@model List<Writer>
+﻿@using Entity.Identity
+@model List<AppUser>
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "WriterList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
 
 <!DOCTYPE html>
 <html>
@@ -35,14 +35,13 @@
                                 <div class="card-body pt-0">
                                     <div class="row">
                                         <div class="col-7">
-                                            <h2 class="lead"><b>@item.Name.ToUpper() @item.Surname.ToUpper()</b></h2>
-                                            <p class="text-muted"><strong>Hakkında:</strong> @item.About</p>
+                                            <h2 class="lead"><b>@item.Name.ToUpper() @item.SurName.ToUpper()</b></h2>
                                             <ul class="ml-4 mb-0 fa-ul text-muted">
-                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Email: @item.Mail</li>
+                                                <li class="small"><span class="fa-li"><i class="fas fa-lg fa-building"></i></span> Email: @item.Email</li>
                                             </ul>
                                         </div>
                                         <div class="col-5 text-center">
-                                            <img src="~/Images/@item.Image" style="height:120px;width:120px" alt="" class="img-circle img-fluid">
+                                            <img src="~/Images/@item.ImagePath" alt="" class="img-circle img-fluid">
                                         </div>
                                     </div>
                                 </div>
@@ -51,7 +50,7 @@
                                         <a href="#" class="btn btn-sm bg-teal">
                                             <i class="fas fa-trash-alt">Yazarın Yazıları</i>
                                         </a>
-                                        <a href="~/Writer/GetByWriterId/@item.Id" class="btn btn-sm btn-primary">
+                                        <a href="~/Account/GetById/@item.Id"  class="btn btn-sm btn-primary">
                                             <i class="fas fa-user"></i> Profili Düzenle
                                         </a>
                                     </div>
@@ -66,3 +65,4 @@
     <!-- /.content -->
 </body>
 </html>
+

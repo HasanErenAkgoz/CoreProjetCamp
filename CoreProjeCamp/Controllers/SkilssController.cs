@@ -40,7 +40,7 @@ namespace CoreProjetCamp.Controllers
         public IActionResult SkilssAdd(SkilssCard skilssCard)
         {
             _skilssCard.Add(skilssCard);
-            return RedirectToAction("SkilssCard");
+            return RedirectToAction("SkilssAdd");
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Business.Concrate
     {
         IImagesDal _ımagesDal;
         private UserManager<AppUser> _userManager;
-        public ImagesManager(IImagesDal ımagesDal,UserManager<AppUser> userManager)
+        public ImagesManager(IImagesDal ımagesDal, UserManager<AppUser> userManager)
         {
             _ımagesDal = ımagesDal;
             _userManager = userManager;

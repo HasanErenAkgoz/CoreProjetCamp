@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.IdentitysContext
 {
-    public class IdentityContext : IdentityDbContext<AppUser,AppRole,int>
+    public class IdentityContext : IdentityDbContext<AppUser, AppRole, int>
     {
         public IdentityContext(DbContextOptions<IdentityContext> dbContext) : base(dbContext) { }
     }

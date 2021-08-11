@@ -16,47 +16,47 @@
 </head>
 <body>
     <br />
-        <table class="table table-bordered table-hover" >
-            <thead>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th class="column1">Adı</th>
+                <th class="column2">Soyadı</th>
+                <th class="column3">Kullanıcı Adı</th>
+                <th class="column4">Email Adresi</th>
+                <th class="column5">Telefon Numarası</th>
+                <th class="column6">Yetkilendirme</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>#</th>
-                    <th class="column1">Adı</th>
-                    <th class="column2">Soyadı</th>
-                    <th class="column3">Kullanıcı Adı</th>
-                    <th class="column4">Email Adresi</th>
-                    <th class="column5">Telefon Numarası</th>
-                    <th class="column6">Yetkilendirme</th>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.SurName</td>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td>@item.PhoneNumber</td>
+                    <td><a class="btn btn-success" href="~/Role/RoleAssign/@item.Id">Yetkilendirme</a></td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Name</td>
-                        <td>@item.SurName</td>
-                        <td>@item.UserName</td>
-                        <td>@item.Email</td>
-                        <td>@item.PhoneNumber</td>
-                        <td><a class="btn btn-success" href="~/Role/RoleAssign/@item.Id">Yetkilendirme</a></td>
-                    </tr>
-                }
+            }
 
 
 
-            </tbody>
-        </table>
-        
+        </tbody>
+    </table>
 
-        <!--===============================================================================================-->
-        <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/bootstrap/js/popper.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="vendor/select2/select2.min.js"></script>
-        <!--===============================================================================================-->
-        <script src="js/main.js"></script>
+
+    <!--===============================================================================================-->
+    <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/bootstrap/js/popper.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="js/main.js"></script>
 
 </body>
 </html>

@@ -18,6 +18,7 @@ namespace Entity.Dtos
         public string WriterName { get; set; }
         public string WriterSurname { get; set; }
         public string WriterImage { get; set; }
+        public int WriterId { get; set; }
         public string BadgeStyle { get; set; }
 
     }

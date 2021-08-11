@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20210808210043_MİgSkilss")]
-    partial class MİgSkilss
+    [Migration("20210811065912_MigAboutUpdate")]
+    partial class MigAboutUpdate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -279,10 +279,6 @@ namespace DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Password")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
 
                     b.Property<bool>("Status")
                         .HasColumnType("bit");

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Entity.Concrate;
+using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
 namespace Entity.Identity
 {

@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Core.Utilities.Helpers;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrate;
 using Entity.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 
@@ -21,13 +23,23 @@ namespace Business.Concrate
 
         public IResult Add(Writer writer)
         {
+            if (writer.Image == null)
+            {
+                writer.Image = "DefaultPng.png";
+            }
+            writer.Status = true;
             _writerDal.Add(writer);
             return new SuccessResult();
         }
 
         public IResult Delete(Writer writer)
         {
-            throw new System.NotImplementedException();
+            if (writer.Status == true)
+            {
+                writer.Status = false;
+            }
+            _writerDal.Update(writer);
+            return new SuccessResult();
         }
 
         public IDataResult<List<Writer>> GetAll()
@@ -35,6 +47,8 @@ namespace Business.Concrate
             AppRole app = new AppRole();
             return new SuccessDataResult<List<Writer>>(_writerDal.GetAll(), Messages.ItemsListed);
         }
+
+
         public IDataResult<Writer> GetById(int id)
         {
             return new SuccessDataResult<Writer>(_writerDal.Get(category => category.Id == id), Messages.ItemsListed);

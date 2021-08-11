@@ -1,4 +1,4 @@
-﻿@model Entity.Identity.AppUser
+﻿@model Entity.Concrate.Writer
 @{
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
@@ -38,36 +38,31 @@
                             {
                                 <form>
                                     <div class="row">
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">Adınız</label>
                                                 @Html.TextBoxFor(user => user.Name, new { @class = "form-control" })
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">Soyadınız</label>
-                                                @Html.TextBoxFor(user => user.SurName, new { @class = "form-control" })
+                                                @Html.TextBoxFor(user => user.Surname, new { @class = "form-control" })
                                             </div>
                                         </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="bmd-label-floating">Email Adresi</label>
-                                                @Html.TextBoxFor(user => user.Email, new { @class = "form-control", @tpye = "Email" })
-                                            </div>
-                                        </div>
+                                      
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">Kullanıcı Adınız</label>
-                                                @Html.TextBoxFor(user => user.UserName, new { @class = "form-control" })
+                                                @Html.TextBoxFor(user => user.Mail, new { @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="bmd-label-floating">Telefon Numaranız</label>
-                                                @Html.TextBoxFor(user => user.PhoneNumber, new { @class = "form-control" })
+                                                @Html.TextBoxFor(user => user.Password, new { @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
@@ -77,7 +72,7 @@
                                             <div class="form-group">
                                                 <label>Resminizi Seçiniz</label>
                                                 <div class="form-group">
-                                                    <input type="file" name="ImagePath" />
+                                                    <input type="file" name="Image" />
                                                 </div>
                                             </div>
                                         </div>

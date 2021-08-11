@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Entity.Identity;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -15,7 +16,6 @@ namespace Entity.Concrate
         public string Image { get; set; }
         [StringLength(50, ErrorMessage = "Lütfen 50 Karekterden Uzun Veri Girmeyiniz")]
         public string Mail { get; set; }
-        [StringLength(150, ErrorMessage = "Lütfen 150 Karekterden Uzun Veri Girmeyiniz")]
         public string Password { get; set; }
         public bool Status { get; set; }
         [StringLength(100)]

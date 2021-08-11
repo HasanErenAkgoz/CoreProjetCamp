@@ -1,8 +1,7 @@
 ﻿@model Entity.Concrate.Heading
-
 @{
-    ViewData["Title"] = "Add";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewData["Title"] = "NewHeading";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
 }
 
 <style>
@@ -12,18 +11,17 @@
 </style>
 <br />
 <center><h3>Başlık Ekleme Ekranı</h3></center>
-@using (Html.BeginForm("Add", "Heading", FormMethod.Post))
+@using (Html.BeginForm("NewHeading", "WriterPanel", FormMethod.Post))
 {
     <form>
         <label>Başlık İsmi</label>
         @Html.TextBoxFor(heading => heading.Name, new { @class = "form-control" })
         <label class="text-danger">@Html.ValidationMessageFor(error => error.Name)</label>
+        
         <label>Kategori Adı</label>
         @Html.DropDownListFor(heading => heading.CategoryId, (List<SelectListItem>)ViewBag.categoryValue, new { @class = "form-control" })
         <label class="text-danger">@Html.ValidationMessageFor(error => error.CategoryId)</label>
-        <label>Yazar Adı</label>
-        @Html.DropDownListFor(heading => heading.WriterId,(List<SelectListItem>)ViewBag.writerName, new { @class = "form-control" })
-        <label class="text-danger">@Html.ValidationMessageFor(error => error.WriterId)</label>
         <button style="margin-top:10px" class="btn btn-success">Başlık Ekle</button>
     </form>
 }
+

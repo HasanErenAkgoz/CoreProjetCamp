@@ -15,5 +15,7 @@ namespace Business.Abstract
         IDataResult<List<Heading>> GetAll();
         IDataResult<List<HeadingDTO>> HeadingDTO();
         IDataResult<Heading> GetById(int id);
+        IDataResult<List<HeadingDTO>> GetAllById(int id);
+
     }
 }

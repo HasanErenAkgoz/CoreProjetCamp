@@ -1,8 +1,11 @@
 ﻿using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Helpers;
+using DataAccess.Concrate.EntityFramework;
+using DataAccess.IdentitysContext;
 using Entity.Identity;
 using Entity.ViewModel;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,14 +28,18 @@ namespace CoreProjetCamp.Controllers
         private UserManager<AppUser> _userManager;
         readonly SignInManager<AppUser> _signInManager;
         private readonly IHostingEnvironment _environment;
+        private readonly RoleManager<AppRole> _roleManager;
         RegisterValidator accountValidator = new RegisterValidator();
 
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IHostingEnvironment environment)
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IHostingEnvironment environment
+            , RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _environment = environment;
+            _roleManager = roleManager;
         }
+
 
         [HttpGet]
         public IActionResult Login(string ReturnUrl)
@@ -82,11 +89,6 @@ namespace CoreProjetCamp.Controllers
                     }
 
                 }
-                else
-                {
-                    ModelState.AddModelError("NotUser2", "Şifreniz Yanlış.");
-
-                }
             }
             else
             {
@@ -116,18 +118,18 @@ namespace CoreProjetCamp.Controllers
             {
                 AppUser user = new AppUser();
                 {
-                    user.Name = register.Name.ToLower();
+                    user.Name = register.Name;
                     user.Email = register.Email.ToLower();
                     user.PhoneNumber = register.PhoneNumber;
                     user.SurName = register.SurName.ToLower();
                     user.UserName = register.UserName;
                     user.ImagePath = "DefaultPng";
                     user.PhoneNumberConfirmed = true;
-                    await _userManager.AddToRoleAsync(user, "Misafir");
                     var result = await _userManager.CreateAsync(user, register.Password);
                     if (result.Succeeded)
                     {
-                        return RedirectToAction("Logın", "Account");
+                        await _userManager.AddToRoleAsync(user, "Misafir");
+                        return RedirectToAction("Login", "Account");
                     }
                     else
                         foreach (var item in validationResult.Errors)
@@ -139,9 +141,10 @@ namespace CoreProjetCamp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin,Yazar,Misafir")]
         public async Task<IActionResult> GetByList(AppUser model)
         {
-            
+
             AppUser user = await _userManager.FindByNameAsync(User.Identity.Name);
             if (model != null)
             {
@@ -150,6 +153,7 @@ namespace CoreProjetCamp.Controllers
             }
             return View(user);
         }
+
         [HttpGet]
         public IActionResult EditProfile()
         {
@@ -225,22 +229,7 @@ namespace CoreProjetCamp.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> RoleAssign(string id)
-        {
-            AppUser user = await _userManager.FindByIdAsync(id);
 
-            await _userManager.AddToRoleAsync(user, "Administrator");
-            await _userManager.AddToRoleAsync(user, "Moderator");
-            await _userManager.AddToRoleAsync(user, "Editor");
-            await _userManager.AddToRoleAsync(user, "tor");
-            return View();
-        }
-        public async Task<IActionResult> Deneme()
-        {
-            var result = _userManager.GetUsersInRoleAsync("Admin");
-            return View(result);
-            
-        }
 
 
 

@@ -5,6 +5,7 @@ using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entity.Concrate;
 using Entity.Dtos;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Concrate
@@ -29,10 +30,14 @@ namespace Business.Concrate
             return new SuccessResult(Messages.ItemDeleted);
 
         }
+        public IDataResult<List<HeadingDTO>> GetAllById(int id)
+        {
+            return new SuccessDataResult<List<HeadingDTO>>(_headingDal.HeadingDTO(x => x.WriterId == id));
+        }
 
         public IDataResult<List<Heading>> GetAll()
         {
-            return new SuccessDataResult<List<Heading>>(_headingDal.GetAll(), Messages.ItemsListed);
+            return new SuccessDataResult<List<Heading>>(_headingDal.GetAll(x => x.Status == true), Messages.ItemsListed);
         }
 
         public IDataResult<Heading> GetById(int id)
@@ -49,6 +54,7 @@ namespace Business.Concrate
 
         {
             heading.Status = true;
+            heading.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
             _headingDal.Update(heading);
             return new SuccessResult(Messages.ItemUpdated);
         }
@@ -59,10 +65,7 @@ namespace Business.Concrate
             {
                 heading.Status = false;
             }
-            else
-            {
-                heading.Status = true;
-            }
+
             return new SuccessResult();
         }
     }

@@ -1,8 +1,6 @@
 ﻿using Business.Abstract;
-using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
 using Entity.Identity;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -13,86 +11,67 @@ using System.Threading.Tasks;
 
 namespace CoreProjetCamp.Controllers
 {
-
-    public class HeadingController : Controller
+    public class WriterPanelController : Controller
     {
+        IWriterService _writerService;
         IHeadingService _headingService;
         ICategoryService _categoryService;
-        private IWriterService _writerService;
-        public HeadingController(IHeadingService headingService, ICategoryService categoryService,
-            IWriterService writerService)
+        public WriterPanelController(IWriterService writerService, IHeadingService headingService, ICategoryService categoryService)
         {
+            _writerService = writerService;
             _headingService = headingService;
             _categoryService = categoryService;
-            _writerService = writerService;
-
         }
-
-        Context context = new Context();
-        [Authorize(Roles = "Admin,Yazar")]
-
-        public IActionResult Index()
+        public IActionResult WritetrProfile()
         {
-            var result = _headingService.HeadingDTO();
-
-            if (result.Success)
-            {
-
-                return View(result.Data);
-            }
-            else
-                return View(result.Message);
-        }
-        [Authorize(Roles = "Admin,Yazar")]
-
-        [HttpGet]
-        public IActionResult Add()
-        {
-
-            List<SelectListItem> categoryValue = (from category in _categoryService.GetAll().Data
-                                                  select new SelectListItem
-                                                  {
-                                                      Text = category.Name,
-                                                      Value = category.Id.ToString()
-                                                  }).ToList();
-
-            ViewBag.categoryValue = categoryValue;
-
-            List<SelectListItem> writerName = (from writer in _writerService.GetAll().Data
-                                               select new SelectListItem
-                                               {
-                                                   Text = writer.Name + " " + writer.Surname,
-                                                   Value = writer.Id.ToString()
-                                               }).ToList();
-
-            ViewBag.writerName = writerName;
-
 
             return View();
         }
-        [HttpPost]
-        public IActionResult Add(Heading heading)
+        public ActionResult MyHeading(int id)
         {
-            heading.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
-            heading.Status = true;
-            _headingService.Add(heading);
-            return RedirectToAction("Index");
+            id = 1;
+            var result = _headingService.GetAllById(id);
+            if (result.Success)
+            {
+                return View(result.Data);
+            }
+            return View();
         }
-        [Authorize(Roles = "Admin,Yazar")]
         [HttpGet]
-        public IActionResult GetByHeading(int id)
+        public IActionResult NewHeading()
         {
             List<SelectListItem> categoryValue = (from category in _categoryService.GetAll().Data
                                                   select new SelectListItem
                                                   {
                                                       Text = category.Name,
-
                                                       Value = category.Id.ToString()
                                                   }).ToList();
 
             ViewBag.categoryValue = categoryValue;
+            return View();
+        }
+        [HttpPost]
+        public IActionResult NewHeading(Heading heading)
+        {
+            heading.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
+            heading.WriterId = 1;
+            _headingService.Add(heading);
+            return RedirectToAction("MyHeading");
+        }
+        [HttpGet]
+        public IActionResult EditHeading(int id)
+        {
+            List<SelectListItem> categoryValue = (from category in _categoryService.GetAll().Data
+                                                  select new SelectListItem
+                                                  {
+                                                      Text = category.Name,
+                                                      Value = category.Id.ToString()
+                                                  }).ToList();
 
-            List<SelectListItem> writerName = (from writer in _writerService.GetAll().Data
+
+            ViewBag.categoryValue = categoryValue;
+
+            List<SelectListItem> writerName = (from writer in _writerService.GetAll().Data.Where(x => x.Id == 1)
                                                select new SelectListItem
                                                {
                                                    Text = writer.Name + " " + writer.Surname,
@@ -100,22 +79,24 @@ namespace CoreProjetCamp.Controllers
                                                }).ToList();
 
             ViewBag.writerName = writerName;
-
+            id = 1;
             var result = _headingService.GetById(id).Data;
             return View(result);
+
         }
         [HttpPost]
-        public IActionResult GetByHeading(Heading heading)
+        public IActionResult EditUpdate(Heading heading)
         {
-            _headingService.Update(heading);
-            return RedirectToAction("Index");
-        }
 
+            _headingService.Update(heading);
+            return RedirectToAction("MyHeading");
+        }
         public IActionResult Delete(int id)
         {
             var result = _headingService.GetById(id).Data;
             _headingService.Delete(result);
-            return RedirectToAction("Index");
+            return RedirectToAction("MyHeading");
         }
+
     }
 }

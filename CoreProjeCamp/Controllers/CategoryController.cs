@@ -9,8 +9,6 @@ using System.Linq;
 
 namespace CoreProjeCamp.Controllers
 {
-    [Authorize()]
-    [Authorize(Roles = "Admin")]
     public class CategoryController : Controller
     {
 
@@ -22,6 +20,7 @@ namespace CoreProjeCamp.Controllers
             _categoryService = categoryService;
             _badgeStyleService = badgeStyleService;
         }
+        
         public IActionResult Index()
         {
             var result = _categoryService.GetAll();
@@ -34,6 +33,7 @@ namespace CoreProjeCamp.Controllers
             }
             return View(result.Message);
         }
+        [Authorize(Roles ="Admin")]
         [HttpGet]
         public IActionResult Add()
         {
@@ -58,6 +58,8 @@ namespace CoreProjeCamp.Controllers
                 return RedirectToAction("Index", "Heading");
 
         }
+        [Authorize(Roles = "Admin")]
+
         public IActionResult Delete(int id)
         {
             var category = _categoryService.GetById(id);
@@ -65,6 +67,7 @@ namespace CoreProjeCamp.Controllers
             return RedirectToAction("Index");
         }
         [HttpGet]
+        [Authorize(Roles = "Admin")]
 
         public IActionResult EditCategory(int id)
         {

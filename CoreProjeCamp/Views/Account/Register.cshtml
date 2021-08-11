@@ -39,76 +39,66 @@
                     @using (Html.BeginForm("Register", "Account", FormMethod.Post))
                     {
                         @Html.ValidationSummary()
-                <form method="POST" enctype="multipart/form-data">
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Adınız</label>
-                                <input class="input--style-4" type="text" name="Name">
-                                <label class="text text-danger">@Html.ValidationMessageFor(error => error.Name)</label>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Soyadınız</label>
-                                <input class="input--style-4" type="text" name="SurName">
-                                <label class="text text-danger ">@Html.ValidationMessageFor(error => error.SurName)</label>
+                        <form method="POST" enctype="multipart/form-data">
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Adınız</label>
+                                        <input class="input--style-4" type="text" name="Name">
+                                        <label class="text text-danger">@Html.ValidationMessageFor(error => error.Name)</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Soyadınız</label>
+                                        <input class="input--style-4" type="text" name="SurName">
+                                        <label class="text text-danger ">@Html.ValidationMessageFor(error => error.SurName)</label>
 
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Kullanıcı Adınız</label>
-                                <input class="input--style-4" type="text" name="UserName">
-                                <label class="text text-danger">@Html.ValidationMessageFor(error => error.UserName)</label>
-
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Email Adresiniz</label>
-                                <div class="input-group-icon">
-                                    <input class="input--style-4 js-datepicker" type="email" name="Email">
-                                    <label class="text text-danger">@Html.ValidationMessageFor(error => error.Email)</label>
-
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Şifreniz</label>
-                                <input class="input--style-4" type="password" name="Password">
-                                <label class="text text-danger">@Html.ValidationMessageFor(error => error.Password)</label>
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Kullanıcı Adınız</label>
+                                        <input class="input--style-4" type="text" name="UserName">
+                                        <label class="text text-danger">@Html.ValidationMessageFor(error => error.UserName)</label>
 
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <label class="label">Telefon Numaranız</label>
-                                <input class="input--style-4" type="text" maxlength="12" name="PhoneNumber">
-                                <label class="text text-danger">@Html.ValidationMessageFor(error => error.PhoneNumber)</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="input-group">
-                                <label class="label">Şifreniz</label>
-                                <input class="input--style-4" type="text" name="About">
-                                <label class="text text-danger">@Html.ValidationMessageFor(error => error.About)</label>
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Email Adresiniz</label>
+                                        <div class="input-group-icon">
+                                            <input class="input--style-4 js-datepicker" type="email" name="Email">
+                                            <label class="text text-danger">@Html.ValidationMessageFor(error => error.Email)</label>
 
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                       
-                    </div>
-                    <div class="p-t-15">
-                        <button class="btn btn--radius-2 btn--blue" type="submit">Kayıt Ol</button>
-                    </div>
-                </form>
+                            <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Şifreniz</label>
+                                        <input class="input--style-4" type="password" name="Password">
+                                        <label class="text text-danger">@Html.ValidationMessageFor(error => error.Password)</label>
+
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Telefon Numaranız</label>
+                                        <input class="input--style-4" type="text" maxlength="12" name="PhoneNumber">
+                                        <label class="text text-danger">@Html.ValidationMessageFor(error => error.PhoneNumber)</label>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit">Kayıt Ol</button>
+                            </div>
+                        </form>
                     }
                 </div>
             </div>
