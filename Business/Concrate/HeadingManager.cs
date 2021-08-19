@@ -66,7 +66,8 @@ namespace Business.Concrate
             {
                 heading.Status = false;
             }
-
+            else
+                heading.Status = true;
             return new SuccessResult();
         }
     }

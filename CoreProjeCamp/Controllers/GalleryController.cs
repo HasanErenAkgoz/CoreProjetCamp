@@ -1,11 +1,13 @@
 ﻿using Business.Abstract;
 using Entity.Concrate;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreProjetCamp.Controllers
-{
-    [Authorize(Roles = "Admin")]
+{   
+    
+    [Authorize(Roles ="Admin")]
 
     public class GalleryController : Controller
     {
