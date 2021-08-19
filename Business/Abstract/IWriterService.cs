@@ -7,7 +7,7 @@ namespace Business.Abstract
 {
     public interface IWriterService
     {
-        IResult Add(Writer writer);
+        IResult Add(Writer writer, IFormFile file);
 
         IResult Update(Writer writer);
 

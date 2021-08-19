@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
 using DataAccess.Concrate.EntityFramework;
+using Entity.Concrate;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -27,6 +28,26 @@ namespace CoreProjetCamp.Controllers
             {
                 return View();
             }
+        }
+        [HttpGet]
+        public IActionResult Add()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Add(Contact contact)
+        {
+          var result=  _contactService.Add(contact);
+            if (result.Success)
+            {
+                ViewBag.succes = "Mesajınız Gönderildi";
+                return RedirectToAction("HomePage","Home");
+
+            }
+            else
+                ViewBag.succes = "Mesajınız Gönderilemedi";
+            return RedirectToAction("HomePage", "Home");
+
         }
         public IActionResult GetContactDetails(int id)
         {

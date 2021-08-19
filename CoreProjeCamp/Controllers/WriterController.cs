@@ -46,11 +46,9 @@ namespace CoreProjetCamp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Add( Writer writer)
+        public IActionResult Add([FromForm(Name = ("Image"))] IFormFile file, [FromForm] Writer writer)
         {
-
-           
-            var result = _writerService.Add(writer);
+            var result = _writerService.Add(writer, file);
             if (result.Success)
             {
                 return RedirectToAction("Index");
@@ -67,7 +65,7 @@ namespace CoreProjetCamp.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Update(Writer writer)
+        public IActionResult Update( Writer writer)
         {
             var result = _writerService.Update(writer);
             if (result.Success)

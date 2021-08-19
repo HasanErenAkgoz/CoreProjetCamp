@@ -20,6 +20,7 @@ namespace Entity.Concrate
         public bool Status { get; set; }
         [StringLength(100)]
         public string About { get; set; }
+
         public virtual ICollection<Heading> Headings { get; set; }
         public virtual ICollection<Content> Contents { get; set; }
     }

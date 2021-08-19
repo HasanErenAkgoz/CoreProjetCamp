@@ -1,0 +1,117 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using Entity.Dtos
+@model IPagedList<HeadingDTO>
+@{
+    ViewData["Title"] = "MyHeading";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+<!DOCTYPE html>
+<head>
+    <script src="lib/jquery-2.0.3.js"></script>
+    <script src="source/jquery.swipebox.js"></script>
+    <link rel="stylesheet" href="source/swipebox.css">
+    <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="screen" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+</head>
+<html>
+
+<body class="hold-transition sidebar-mini">
+    <br />
+    <!-- Content Header (Page header) -->
+    <section class="content">
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <h3 style="margin-top:10px;" class="card-title">Başlık İşlemleri</h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <table id="dataTable" class="table table-striped projects">
+                    <thead>
+                        <tr>
+                            <th>
+                                #
+                            </th>
+                            <th>
+                                Başlık Adı
+                            </th>
+                            <th>
+                                Oluşturan Yazar
+                            </th>
+                            <th>
+                                Kategori
+                            </th>
+                            <th>
+                                Durum
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>
+                                    @item.Name
+                                    <br />
+                                    <small>@item.Date.ToShortDateString()</small>
+                                </td>
+                                <td>
+                                    @item.WriterName.ToUpper() @item.WriterSurname.ToUpper()
+                                    <img alt="image" class="table-avatar" style="height:70px; width:70px" src="~/Images/@item.WriterImage">
+                                </td>
+                                <td>
+                                    <span class="@item.BadgeStyle">@item.CategoryName</span>
+                                </td>
+                                <td class="statusValue">
+                                    @if (item.Status == true)
+                                    {
+                                        <span class="badge badge-success">Aktif</span>}
+
+                                    else
+                                    {
+                                        <span class="badge badge-danger">Pasif</span>}
+
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-primary btn-sm" href="~/Default/HeadingContent/@item.Id">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Yazılar
+                                    </a>
+                                </td>
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-success btn-sm" href="~/WriterPanelContent/AddHeading/@item.Id">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Bu başlığa yaz
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+
+
+            </div>
+            <br />
+        </div>
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("Heading", new { page }))
+
+        <a href="~/WriterPanel/NewHeading" class="btn btn-primary">Yeni Başlık Girişi</a>
+
+    </section>
+
+  
+</body>
+</html>

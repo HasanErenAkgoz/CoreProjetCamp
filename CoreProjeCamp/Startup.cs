@@ -89,8 +89,8 @@ namespace CoreProjeCamp
             app.UseAuthentication();
             app.UseAuthorization();
             app.UseCookiePolicy();
-            app.UseMvc(_ => _.MapRoute("Default", "{controller=Account}/{action=Login}/{id?}"));
-
+            app.UseMvc(_ => _.MapRoute("Default", "{controller=Home}/{action=HomePage}/{id?}"));
+      
 
 
 

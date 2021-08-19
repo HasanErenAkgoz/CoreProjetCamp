@@ -1,13 +1,29 @@
 ﻿@using Entity.Dtos
 @model List<ContentsDTO>
-@{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-}
+@{ ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
 
-<h1>Index</h1>
-@foreach (var item in Model)
-{
-    @item.CategoryName
-}
 
+<br />
+
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Yazı İçeriği</th>
+            <th>Yazıldığı Tarih</th>
+            <th>Başlık</th>
+            <th>Yazar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td>@item.Text</td>
+    <td>@item.Date.ToShortDateString()</td>
+    <td>@item.HeadingName</td>
+    <td>@item.WriterName @item.WriterSurname</td>
+</tr>
+           }
+    </tbody>
+</table>

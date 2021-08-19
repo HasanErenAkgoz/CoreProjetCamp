@@ -19,6 +19,7 @@ namespace Business.Concrate
         }
         public IResult Add(Heading heading)
         {
+            heading.Status = true;
             _headingDal.Add(heading);
             return new SuccessResult(Messages.ItemAdded);
         }
@@ -32,7 +33,7 @@ namespace Business.Concrate
         }
         public IDataResult<List<HeadingDTO>> GetAllById(int id)
         {
-            return new SuccessDataResult<List<HeadingDTO>>(_headingDal.HeadingDTO(x => x.WriterId == id));
+            return new SuccessDataResult<List<HeadingDTO>>(_headingDal.HeadingDTO(x => x.WriterId == id && x.Status == true));
         }
 
         public IDataResult<List<Heading>> GetAll()

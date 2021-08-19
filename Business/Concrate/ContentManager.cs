@@ -18,7 +18,10 @@ namespace Business.Concrate
         }
         public IResult Add(Content content)
         {
-            throw new NotImplementedException();
+            content.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
+            content.Status = true;
+            _contentDal.Add(content);
+            return new SuccessResult(Messages.ItemAdded);
         }
 
         public IDataResult<List<ContentsDTO>> ContentDto()
@@ -40,6 +43,13 @@ namespace Business.Concrate
         public IDataResult<Content> GetById(int id)
         {
             return new SuccessDataResult<Content>(_contentDal.Get(dto => dto.Id == id), Messages.ItemsListed);
+        }
+
+     
+
+        public IDataResult<List<ContentsDTO>> GetListByWriterId(int id)
+        {
+            return new SuccessDataResult<List<ContentsDTO>>(_contentDal.ContentDto(x => x.WriterId == id));
         }
 
         public IDataResult<List<ContentsDTO>> GetListId(int id)

@@ -20,9 +20,7 @@ namespace DataAccess.Concrate.EntityFramework
                              on content.HeadingId equals heaading.Id
 
                              join writer in context.Writers
-                             on content.WritersId equals writer.Id
-
-
+                             on content.WriterId equals writer.Id
 
                              select new ContentsDTO
                              {

@@ -17,5 +17,7 @@ namespace Business.Abstract
         IDataResult<List<ContentsDTO>> GetAll();
         IDataResult<Content> GetById(int id);
         IDataResult<List<ContentsDTO>> GetListId(int id);
+        IDataResult<List<ContentsDTO>> GetListByWriterId(int id);
+
     }
 }

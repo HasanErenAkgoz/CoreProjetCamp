@@ -21,8 +21,9 @@ namespace Business.Concrate
             _roleManager = role;
         }
 
-        public IResult Add(Writer writer)
+        public IResult Add(Writer writer, IFormFile file)
         {
+            writer.Image = FileHelper.Add(file);
             if (writer.Image == null)
             {
                 writer.Image = "DefaultPng.png";
@@ -56,8 +57,9 @@ namespace Business.Concrate
 
         public IResult Update(Writer writer)
         {
+            writer.Status = true;
             _writerDal.Update(writer);
-            return new SuccessResult();
+            return new SuccessResult(Messages.ItemUpdated);
         }
     }
 }

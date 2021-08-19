@@ -1,6 +1,8 @@
 ﻿using Business.Abstract;
+using DataAccess.Concrate.EntityFramework;
 using Entity.Concrate;
 using Entity.Identity;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -27,15 +29,20 @@ namespace CoreProjetCamp.Controllers
 
             return View();
         }
-        public ActionResult MyHeading(int id)
+        public ActionResult MyHeading(int writerId)
         {
-            id = 1;
-            var result = _headingService.GetAllById(id);
-            if (result.Success)
+            using (var context = new Context())
             {
-                return View(result.Data);
+
+                var session = HttpContext.Session.GetString("Mail");
+                writerId = context.Writers.Where(x => x.Mail == session).Select(y => y.Id).FirstOrDefault();
+                var result = _headingService.GetAllById(writerId);
+                if (result.Success)
+                {
+                    return View(result.Data);
+                }
+                return View();
             }
-            return View();
         }
         [HttpGet]
         public IActionResult NewHeading()
@@ -53,36 +60,45 @@ namespace CoreProjetCamp.Controllers
         [HttpPost]
         public IActionResult NewHeading(Heading heading)
         {
-            heading.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
-            heading.WriterId = 1;
-            _headingService.Add(heading);
-            return RedirectToAction("MyHeading");
+            using (var context = new Context())
+            {
+                var session = HttpContext.Session.GetString("Mail");
+                var writerId = context.Writers.Where(x => x.Mail == session).Select(y => y.Id).FirstOrDefault();
+                heading.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
+                heading.WriterId = writerId;
+                _headingService.Add(heading);
+                return RedirectToAction("MyHeading");
+            }
         }
         [HttpGet]
         public IActionResult EditHeading(int id)
         {
-            List<SelectListItem> categoryValue = (from category in _categoryService.GetAll().Data
-                                                  select new SelectListItem
-                                                  {
-                                                      Text = category.Name,
-                                                      Value = category.Id.ToString()
-                                                  }).ToList();
+            using (var context = new Context())
+            {
+                var session = HttpContext.Session.GetString("Mail");
+                var writerId = context.Writers.Where(x => x.Mail == session).Select(y => y.Id).FirstOrDefault();
+
+                List<SelectListItem> categoryValue = (from category in _categoryService.GetAll().Data
+                                                      select new SelectListItem
+                                                      {
+                                                          Text = category.Name,
+                                                          Value = category.Id.ToString()
+                                                      }).ToList();
 
 
-            ViewBag.categoryValue = categoryValue;
+                ViewBag.categoryValue = categoryValue;
 
-            List<SelectListItem> writerName = (from writer in _writerService.GetAll().Data.Where(x => x.Id == 1)
-                                               select new SelectListItem
-                                               {
-                                                   Text = writer.Name + " " + writer.Surname,
-                                                   Value = writer.Id.ToString()
-                                               }).ToList();
+                List<SelectListItem> writerName = (from writer in _writerService.GetAll().Data.Where(x => x.Id == writerId)
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = writer.Name + " " + writer.Surname,
+                                                       Value = writer.Id.ToString()
+                                                   }).ToList();
 
-            ViewBag.writerName = writerName;
-            id = 1;
-            var result = _headingService.GetById(id).Data;
-            return View(result);
-
+                ViewBag.writerName = writerName;
+                var result = _headingService.GetById(id).Data;
+                return View(result);
+            }
         }
         [HttpPost]
         public IActionResult EditUpdate(Heading heading)
@@ -97,6 +113,36 @@ namespace CoreProjetCamp.Controllers
             _headingService.Delete(result);
             return RedirectToAction("MyHeading");
         }
+        [HttpGet]
+        public IActionResult GetByWriterInfo(Writer writer)
+        {
+            using (var context = new Context())
+            {
+                var session = HttpContext.Session.GetString("Mail");
+                var writerId = context.Writers.Where(x => x.Mail == session).Select(y => y.Id).FirstOrDefault();
+                var result = _writerService.GetById(writerId);
+                ViewBag.Image = result.Data.Image;
+                if (result != null)
+                {
+                    return View(result.Data);
+
+                }
+                return View();
+            }
+        }
+        [HttpPost]
+        public IActionResult Update(Writer writer)
+        {
+            var result = _writerService.Update(writer);
+
+            if (result.Success)
+            {
+                return RedirectToAction("GetByWriterInfo");
+            }
+            else
+                return View();
+        }
+
 
     }
 }

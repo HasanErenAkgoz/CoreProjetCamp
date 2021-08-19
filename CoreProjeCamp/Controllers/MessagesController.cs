@@ -177,7 +177,6 @@ namespace CoreProjetCamp.Controllers
         public IActionResult IsReadValues(int id)
         {
             IsReadValue(id);
-
             return RedirectToAction("Inbox");
         }
 

@@ -34,7 +34,7 @@
                             <h4 class="card-title">Profil Bilgileri</h4>
                         </div>
                         <div class="card-body">
-                            @using (Html.BeginForm("EditProfile", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            @using (Html.BeginForm("Update", "Writer", FormMethod.Post, new { enctype = "multipart/form-data" }))
                             {
                                 <form>
                                     <div class="row">
@@ -72,7 +72,7 @@
                                             <div class="form-group">
                                                 <label>Resminizi Seçiniz</label>
                                                 <div class="form-group">
-                                                    <input type="file" name="Image" />
+                                                    <input type="file" name="Image" value="DefaultPng.png" />
                                                 </div>
                                             </div>
                                         </div>

@@ -131,10 +131,7 @@ namespace DataAccess.Migrations
                     b.Property<string>("Text")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WriterId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WritersId")
+                    b.Property<int>("WriterId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -314,7 +311,9 @@ namespace DataAccess.Migrations
 
                     b.HasOne("Entity.Concrate.Writer", "Writer")
                         .WithMany("Contents")
-                        .HasForeignKey("WriterId");
+                        .HasForeignKey("WriterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Heading");
 

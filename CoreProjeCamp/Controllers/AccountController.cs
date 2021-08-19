@@ -1,10 +1,13 @@
-﻿using Business.ValidationRules.FluentValidation;
+﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
 using Core.Utilities.Helpers;
 using DataAccess.Concrate.EntityFramework;
 using DataAccess.IdentitysContext;
+using Entity.Concrate;
 using Entity.Identity;
 using Entity.ViewModel;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -17,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
@@ -30,14 +34,16 @@ namespace CoreProjetCamp.Controllers
         private readonly IHostingEnvironment _environment;
         private readonly RoleManager<AppRole> _roleManager;
         RegisterValidator accountValidator = new RegisterValidator();
+        IWriterService _writerService;
 
         public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager, IHostingEnvironment environment
-            , RoleManager<AppRole> roleManager)
+            , RoleManager<AppRole> roleManager, IWriterService writer)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _environment = environment;
             _roleManager = roleManager;
+            _writerService = writer;
         }
 
 
@@ -229,9 +235,53 @@ namespace CoreProjetCamp.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult WriterLogin()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> WriterLogin(Writer writer)
 
+        {
+            using (var context = new Context())
+            {
+                var WriterInfo = context.Writers.FirstOrDefault(x => x.Mail == writer.Mail && x.Password == writer.Password);
+                if (WriterInfo != null)
+                {
+                    var clasims = new List<Claim>
+                    {
+                        new Claim(ClaimTypes.Email,writer.Mail)
+                };
+                    var userIdentity = new ClaimsIdentity(clasims, "Login");
+                    ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
+                    await HttpContext.SignInAsync(principal);
+                    HttpContext.Session.SetString("Mail", writer.Mail);
+                    return RedirectToAction("MyHeading", "WriterPanel");
+                }
+            }
+            return View();
+        }
 
+        [HttpGet]
+        public async Task<IActionResult> WriterAdd()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult WriterAdd([FromForm(Name = ("Image"))] IFormFile file, [FromForm] Writer writer)
+        {
+            if (writer.Image == null)
+            {
+                writer.Image = "";
+            }
+            var result = _writerService.Add(writer, file);
 
-
+            if (result.Success)
+            {
+                return RedirectToAction("WriterLogin");
+            }
+            return View();
+        }
     }
 }

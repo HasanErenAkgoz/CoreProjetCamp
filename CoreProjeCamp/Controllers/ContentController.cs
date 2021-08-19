@@ -26,5 +26,6 @@ namespace CoreProjetCamp.Controllers
         {
             return View();
         }
+       
     }
 }

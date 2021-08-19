@@ -1,10 +1,10 @@
-﻿
+﻿@using Entity.Concrate
+@model List<Message>
 @{
     ViewData["Title"] = "Trash";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-!DOCTYPE html>
 <html>
 
 <body class="hold-transition sidebar-mini">
@@ -29,7 +29,7 @@
                     <div class="card-header">
                         <h3 class="card-title">Çöp Kutusu</h3>
                         <div class="card-tools">
-                           
+
                         </div>
                         <div class="card-tools">
                             <div class="input-group input-group-sm">
@@ -82,7 +82,7 @@
                                                 </div>
                                             </td>
                                             <td class="mailbox-star"><a href="~/Messages/GetMessageDetail/@item.Id"><i class="fas fa-star text-warning"></i></a></td>
-                                            <td class="mailbox-name"><a href="~/Messages/GetMessageDetail/@item.Id">@item.Reciver</a></td>
+                                            <td class="mailbox-name"><a href="~/Messages/GetMessageDetail/@item.Id">@item.Receiver</a></td>
                                             <td class="mailbox-subject">
                                                 <b>@item.Subject</b> - @if (item.Content.Length >= 30)
                                                 {

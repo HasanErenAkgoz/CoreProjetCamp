@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CoreProjetCamp.Controllers
 {
+    [Authorize(Roles = "Admin")]
+
     public class GalleryController : Controller
     {
         IImagesService _ımagesService;

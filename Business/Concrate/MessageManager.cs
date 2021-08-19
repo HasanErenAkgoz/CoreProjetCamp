@@ -23,7 +23,6 @@ namespace Business.Concrate
             message.Date = DateTime.Parse(DateTime.Now.ToShortDateString());
             message.sender = email;
             message.Receiver = message.Receiver;
-            message.DraftStatus = false;
             message.IsRead = false;
             message.IsDeleted = false;
             _messageDal.Add(message);

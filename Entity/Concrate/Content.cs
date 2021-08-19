@@ -12,7 +12,7 @@ namespace Entity.Concrate
         public DateTime Date { get; set; }
         public int HeadingId { get; set; }
         public virtual Heading Heading { get; set; }
-        public int WritersId { get; set; }
+        public int WriterId { get; set; }
         public virtual Writer Writer { get; set; }
         public bool Status { get; set; }
     }

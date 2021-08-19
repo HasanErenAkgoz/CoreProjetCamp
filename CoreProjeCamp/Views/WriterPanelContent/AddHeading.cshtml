@@ -1,0 +1,26 @@
+﻿
+@model Entity.Concrate.Content
+@{
+    ViewData["Title"] = "Add";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+
+<style>
+    label {
+        margin-top: 10px;
+    }
+</style>
+<br />
+<center><h3>Entry Girişi</h3></center>
+@using (Html.BeginForm("Add", "WriterPanelContent", FormMethod.Post))
+{
+    <form>
+        <input type="text" name="HeadingId" value="@ViewBag.Id" hidden="hidden" readonly="readonly" />
+        
+        <label>Entry Girişi</label>
+        @Html.TextAreaFor(content=>content.Text,10,30, new { @class = "form-control" })
+        <label class="text-danger">@Html.ValidationMessageFor(error => error.Text)</label>
+        <button style="margin-top:10px" class="btn btn-success">Kaydet</button>
+    </form>
+}

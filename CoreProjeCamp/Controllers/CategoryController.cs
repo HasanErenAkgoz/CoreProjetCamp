@@ -9,6 +9,7 @@ using System.Linq;
 
 namespace CoreProjeCamp.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class CategoryController : Controller
     {
 
@@ -27,7 +28,6 @@ namespace CoreProjeCamp.Controllers
 
             if (result.Success)
             {
-                ViewBag.data = HttpContext.Session.GetString("Email");
 
                 return View(result.Data);
             }
@@ -68,7 +68,6 @@ namespace CoreProjeCamp.Controllers
         }
         [HttpGet]
         [Authorize(Roles = "Admin")]
-
         public IActionResult EditCategory(int id)
         {
             List<SelectListItem> badgeValue = (from badge in _badgeStyleService.GetAll().Data
